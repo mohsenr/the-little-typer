@@ -13,3 +13,13 @@
            [n Nat])
           (-> (Vec (Pair A B) n)
               (Pair (Vec A n) (Vec B n)))))
+
+(define unzip
+  (lambda (A B n vector)
+    (ind-Vec n vector
+      (lambda (n _) (Pair (Vec A n) (Vec B n)))
+      (cons vecnil vecnil)
+      (lambda (_ e _ es)
+        (cons
+          (vec:: (car e) (car es))
+          (vec:: (cdr e) (cdr es)))))))
